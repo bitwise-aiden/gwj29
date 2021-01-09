@@ -4,7 +4,7 @@
 extends Node
 
 
-# Whether or not the class processes the delta time for _process or 
+# Whether or not the class processes the delta time for _process or
 # _physics_process
 var _process_physics: bool = false
 
@@ -39,7 +39,7 @@ func on_interval( interval: float, offset: float ) -> bool:
 		floor( ( self.elapsed_time - offset ) / interval )
 
 
-func on_time( time: float, timestamp: float ) -> bool: 
+func on_time( time: float, timestamp: float ) -> bool:
 	return time >= timestamp && time - self.delta_time < timestamp
 
 

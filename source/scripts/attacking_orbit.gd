@@ -12,7 +12,7 @@ func _physics_process(delta: float) -> void:
 	self.__orbit_pets()
 
 
-	if Input.is_action_just_pressed( "attacking" ):
+	if Input.is_action_just_pressed( "attack" ):
 		self.__handle_attacking()
 
 
@@ -45,7 +45,6 @@ func __handle_attacking():
 			pet = pets.pop_back()
 
 		if pet.state == Pet.STATES.orbiting:
-			print(pet.state)
 			pet.attacking_direction = facing_direction
 			pet.set_state(Pet.STATES.attacking)
 

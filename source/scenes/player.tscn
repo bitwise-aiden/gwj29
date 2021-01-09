@@ -8,7 +8,6 @@
 extents = Vector2( 16, 16 )
 
 [node name="player" type="KinematicBody2D"]
-position = Vector2( 99.2258, 151.361 )
 z_index = 1
 script = ExtResource( 2 )
 

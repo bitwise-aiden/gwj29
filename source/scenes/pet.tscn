@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/scripts/pet.gd" type="Script" id=1]
-[ext_resource path="res://source/resources/pets/attacking.tres" type="Resource" id=2]
+[ext_resource path="res://source/assets/pet.png" type="Texture" id=2]
 
 [node name="pet" type="Node2D"]
 z_index = 1
 script = ExtResource( 1 )
-resource = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )

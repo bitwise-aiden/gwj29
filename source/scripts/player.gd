@@ -6,7 +6,6 @@ const JUMP_VELOCITY_MAX = 500.0
 const JUMP_BUFFER_MAX = 0.1
 const ON_GROUND_BUFFER = 0.1
 
-
 var acceleration: float = 1000.0
 var velocity: Vector2 = Vector2.ZERO
 
@@ -19,6 +18,11 @@ var on_ground_buffer: float = 0.0
 
 var facing_direction: float = 1.0
 
+
+func _ready() -> void:
+	Globals.player_instance = self
+
+
 func _physics_process(delta: float) -> void:
 	if self.jump_buffer > 0.0:
 		self.jump_buffer = max(0.0, self.jump_buffer - PhysicsTime.delta_time)
@@ -26,9 +30,9 @@ func _physics_process(delta: float) -> void:
 	if self.on_ground_buffer > 0.0:
 		self.on_ground_buffer = max(0.0, self.on_ground_buffer - PhysicsTime.delta_time)
 
-	if Input.is_action_just_pressed( "ui_up" ):
+	if Input.is_action_just_pressed( "jump" ):
 		self.jump_buffer = self.JUMP_BUFFER_MAX
-	elif Input.is_action_just_released( "ui_up" ):
+	elif Input.is_action_just_released( "jump" ):
 		if self.velocity.y < 0.0:
 			self.velocity.y *= 0.3
 
@@ -45,7 +49,7 @@ func _physics_process(delta: float) -> void:
 		self.velocity = lerp( self.velocity, Vector2.ZERO, self.drag)
 
 		var movement_direction = Vector2(
-			Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
+			Input.get_action_strength("right") - Input.get_action_strength("left"),
 			0.0
 		).normalized()
 
