@@ -1,0 +1,65 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "BaseTask",
+"language": "GDScript",
+"path": "res://tools/scripts/task/base_task.gd"
+}, {
+"base": "Reference",
+"class": "CurrentQueue",
+"language": "GDScript",
+"path": "res://tools/scripts/current_queue.gd"
+}, {
+"base": "Reference",
+"class": "PlayerInput",
+"language": "GDScript",
+"path": "res://tools/scripts/player_input.gd"
+}, {
+"base": "Reference",
+"class": "Task",
+"language": "GDScript",
+"path": "res://tools/scripts/task/task.gd"
+}, {
+"base": "Reference",
+"class": "TaskQueue",
+"language": "GDScript",
+"path": "res://tools/scripts/task/task_queue.gd"
+}, {
+"base": "Reference",
+"class": "VirtualButton",
+"language": "GDScript",
+"path": "res://tools/scripts/input/virtual_button.gd"
+} ]
+_global_script_class_icons={
+"BaseTask": "",
+"CurrentQueue": "",
+"PlayerInput": "",
+"Task": "",
+"TaskQueue": "",
+"VirtualButton": ""
+}
+
+[application]
+
+config/name="gwj29"
+run/main_scene="res://source/scenes/main.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+window/size/resizable=false
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
