@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://tools/scripts/player_input.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Slime",
+"language": "GDScript",
+"path": "res://source/scripts/slime.gd"
+}, {
 "base": "Reference",
 "class": "Task",
 "language": "GDScript",
@@ -43,15 +48,22 @@ _global_script_classes=[ {
 "class": "VirtualButton",
 "language": "GDScript",
 "path": "res://tools/scripts/input/virtual_button.gd"
+}, {
+"base": "TileMap",
+"class": "WorldEdges",
+"language": "GDScript",
+"path": "res://source/scripts/world_edges.gd"
 } ]
 _global_script_class_icons={
 "BaseTask": "",
 "CurrentQueue": "",
 "Pet": "",
 "PlayerInput": "",
+"Slime": "",
 "Task": "",
 "TaskQueue": "",
-"VirtualButton": ""
+"VirtualButton": "",
+"WorldEdges": ""
 }
 
 [application]
@@ -65,6 +77,7 @@ config/icon="res://icon.png"
 Globals="*res://tools/scripts/singletons/globals.gd"
 Time="*res://tools/scripts/singletons/time.gd"
 PhysicsTime="*res://tools/scripts/singletons/physics_time.gd"
+TaskManager="*res://tools/scripts/task/task_manager.gd"
 
 [display]
 

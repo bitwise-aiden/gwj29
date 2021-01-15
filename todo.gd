@@ -35,3 +35,21 @@
 #	pets could have recharge so you have to manage which are occuring.
 #		dash pets would have a longer recharge
 
+
+# POLISH STREAM THINGS!
+# - Add fade effect to text
+# - Add flower picking which increases bee damage
+
+
+# NEXT TIME WE WORK ON THIS!
+# Update background to be the same but brown in the underground
+# Create a new base tile for the underground
+# Add text to boss
+# Fix text on slimes
+# Add open scene with backstory
+# Add queen bee to round out game and finish it
+# Stretch: Keep count of deaths
+# Stretch: Keep count of time taken
+# Polish: Balance boss fight now that we have three bees
+# Add boss health bar
+# Add arrow pointing in direction to travel + prevent movement if enemies present

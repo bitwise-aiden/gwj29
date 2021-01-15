@@ -25,9 +25,12 @@ func __collect_pets() -> void:
 		if distance <= self.COLLECTION_RADIUS_MAX:
 			pet.set_state(Pet.STATES.joining)
 			self.orbiting.append(pet)
+			self.get_parent().found_bee = true
 
 
 func __handle_attacking():
+	self.get_parent().set_text("Buzzzz!")
+
 	if self.orbiting.empty():
 		return
 
@@ -81,3 +84,9 @@ func __orbit_pets() -> void:
 
 func __position() -> Vector2:
 	return self.get_parent().position
+
+
+func stop_attack() -> void:
+	for pet in self.orbiting:
+		if pet.state == Pet.STATES.attacking:
+			pet.state = Pet.STATES.orbiting
