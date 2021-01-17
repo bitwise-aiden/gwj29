@@ -24,7 +24,7 @@ var attacking_direction: float = 0.0
 var attacking_enemy: Node = null
 
 var resting_timer: float = 0.0
-
+var facing_direction: float = 0.0
 
 func _ready() -> void:
 	self.add_to_group("pets")
@@ -36,6 +36,8 @@ func _physics_process(delta: float) -> void:
 			self.__handle_gnomeless()
 		STATES.joining:
 			self.__handle_joining()
+		STATES.orbiting:
+			self.__handle_orbiting()
 		STATES.attacking:
 			self.__handle_attacking()
 		STATES.resting:
@@ -86,8 +88,7 @@ func __handle_change_to_attacking():
 
 
 func __handle_gnomeless() -> void:
-	self.set_text("Buzz buzz!")
-
+	self.set_text("Buzz!")
 
 	var elapsed = PhysicsTime.elapsed_time
 	var radians = fmod( pow( elapsed , 2.0 ), TAU )
@@ -107,6 +108,10 @@ func __handle_gnomeless() -> void:
 
 	$sprite.scale.x = -sign(self.wander_velocity_x)
 
+
+func __handle_orbiting() -> void:
+	if self.facing_direction:
+		$sprite.scale.x = -self.facing_direction
 
 func __handle_joining() -> void:
 	self.set_text("")
@@ -147,6 +152,10 @@ func __handle_resting() -> void:
 	$sprite.scale.y = -1.0
 
 func set_text(text: String) -> void:
-	$Label.text = text
-	$Label.rect_size.x = 0
-	$Label.rect_position.x = -$Label.rect_size.x * 0.5
+	$message.text = text
+	$message.rect_size.x = 0
+	$message.rect_position.x = -$message.rect_size.x * 0.25
+	$shadow.text = text
+	$shadow.rect_size.x = 0
+	$shadow.rect_position.x = 1 - $shadow.rect_size.x * 0.25
+	$shadow.rect_position.y = $message.rect_position.y + 1

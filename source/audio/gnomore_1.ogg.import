@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/gnomore_1.ogg-2be8f25d540382c7880112bf84931b04.oggstr"
+
+[deps]
+
+source_file="res://source/audio/gnomore_1.ogg"
+dest_files=[ "res://.import/gnomore_1.ogg-2be8f25d540382c7880112bf84931b04.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

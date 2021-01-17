@@ -14,5 +14,5 @@ func _ready() -> void:
 func load_scene( name: String ) -> void:
 	if name in self.__scenes_by_name:
 		self.get_tree().change_scene_to( self.__scenes_by_name[ name ] )
-	else: 
+	else:
 		push_error( "Could not load scene with name: %s" % name )

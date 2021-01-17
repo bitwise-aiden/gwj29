@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://tools/scenes/camera.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/assets/background.png" type="Texture" id=2]
+[ext_resource path="res://source/assets/just_tree.png" type="Texture" id=3]
+[ext_resource path="res://source/assets/just_hive.png" type="Texture" id=4]
+[ext_resource path="res://source/scripts/intro.gd" type="Script" id=5]
+[ext_resource path="res://source/audio/intro_1.ogg" type="AudioStream" id=6]
+
+[node name="intro" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="background" type="Sprite" parent="."]
+position = Vector2( 320, 180 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="tree" type="Sprite" parent="."]
+position = Vector2( 233.726, 82.3095 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="hive" type="Sprite" parent="."]
+position = Vector2( 244, 166 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+
+[node name="camera" parent="." instance=ExtResource( 1 )]
+visible = false
+position = Vector2( 320, 180 )
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="intro" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+[connection signal="finished" from="intro" to="." method="_on_audio_finished"]

@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/pet.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://source/scripts/player.gd"
+}, {
 "base": "Reference",
 "class": "PlayerInput",
 "language": "GDScript",
@@ -58,6 +63,7 @@ _global_script_class_icons={
 "BaseTask": "",
 "CurrentQueue": "",
 "Pet": "",
+"Player": "",
 "PlayerInput": "",
 "Slime": "",
 "Task": "",
@@ -69,7 +75,7 @@ _global_script_class_icons={
 [application]
 
 config/name="gwj29"
-run/main_scene="res://source/scenes/main.tscn"
+run/main_scene="res://source/scenes/intro.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -78,6 +84,7 @@ Globals="*res://tools/scripts/singletons/globals.gd"
 Time="*res://tools/scripts/singletons/time.gd"
 PhysicsTime="*res://tools/scripts/singletons/physics_time.gd"
 TaskManager="*res://tools/scripts/task/task_manager.gd"
+SceneManager="*res://source/scenes/scene_manager.tscn"
 
 [display]
 
@@ -107,6 +114,10 @@ texture={
 "size_limit": 0,
 "stream": false,
 "svg/scale": 1.0
+}
+ogg_vorbis={
+"loop": false,
+"loop_offset": 0
 }
 
 [input]

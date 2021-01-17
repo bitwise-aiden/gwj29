@@ -1,4 +1,4 @@
-extends KinematicBody2D
+class_name Player extends KinematicBody2D
 
 const VELOCITY_MAX = 250.0
 const JUMP_VELOCITY_MAX = 500.0
@@ -23,13 +23,6 @@ var found_bee: bool = false
 
 var damaged_timer: float = 0.0
 
-var random_lines = [
-	"What a lovely day!",
-	"I wonder how Ian is doing.",
-	"Off to find some bees",
-	"WE ARE ALL OKAY"
-]
-
 
 func _ready() -> void:
 	Globals.player_instance = self
@@ -41,11 +34,6 @@ func _physics_process(delta: float) -> void:
 	self.__handle_damaged()
 	self.__handle_movement()
 
-	if !self.is_on_floor() && !self.damaged_timer:
-		self.set_text("Weee!")
-	elif $Label.text == "Weee!":
-		self.set_text("")
-
 
 func __handle_damaged() -> void:
 	if !self.damaged_timer:
@@ -55,7 +43,10 @@ func __handle_damaged() -> void:
 		if PhysicsTime.on_interval( 0.1, 0.0 ):
 			$sprite.visible = !$sprite.visible
 
-		self.set_text("Ouch! That hurt!")
+		self.set_text("Ouch!")
+		self.stop_sound($attacking_orbit/buzz)
+		self.stop_sound($wee)
+		self.play_sound($ouch)
 	else:
 		self.damaged_timer = 0.0
 		$sprite.visible = true
@@ -104,6 +95,8 @@ func __handle_movement():
 	self.velocity.x = min( self.velocity.x, self.VELOCITY_MAX )
 
 	if self.should_jump() && !self.damaged_timer:
+		self.set_text("Weee!")
+		self.play_sound($wee, $attacking_orbit/buzz)
 		self.velocity.y = -self.JUMP_VELOCITY_MAX
 		self.jumping = true
 
@@ -135,9 +128,15 @@ func damage(body: Node) -> void:
 	self.damaged_timer = PhysicsTime.elapsed_time + 0.5
 	$sprite.visible = false
 
+	TaskManager.add_queue(
+		"camera",
+		Globals.camera_instance.create_camera_shake(2.0, 0.1)
+	)
+
 	self.velocity = direction * 300.0
 
 	self.health -= 1
+	Globals.health_instance.health_changed(self.health)
 
 	if health <= 0:
 		$attacking_orbit.stop_attack()
@@ -148,9 +147,13 @@ func should_jump() -> bool:
 
 
 func set_text(text: String) -> void:
-	$Label.text = text
-	$Label.rect_size.x = 0
-	$Label.rect_position.x = -$Label.rect_size.x * 0.5
+	$message.text = text
+	$message.rect_size.x = 0
+	$message.rect_position.x = -$message.rect_size.x * 0.25
+	$shadow.text = text
+	$shadow.rect_size.x = 0
+	$shadow.rect_position.x = 1 - $shadow.rect_size.x * 0.25
+	$shadow.rect_position.y = $message.rect_position.y + 1
 
 
 func _on_hit_area_body_entered(body: Node) -> void:
@@ -172,3 +175,19 @@ func _on_hit_area_body_entered(body: Node) -> void:
 					pet.call_deferred("queue_free")
 		elif self.velocity.y < 0.0:
 			self.velocity.y = 0.0
+
+func play_sound(sound: Node, other: Node = null) -> void:
+	if other:
+		for child in other.get_children():
+			if child.playing:
+				return
+
+	for child in sound.get_children():
+		if child.playing:
+			return
+	sound.get_child(randi() % sound.get_child_count()).play()
+
+
+func stop_sound(sound: Node) -> void:
+	for child in sound.get_children():
+		child.playing = false

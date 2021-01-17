@@ -29,8 +29,6 @@ func __collect_pets() -> void:
 
 
 func __handle_attacking():
-	self.get_parent().set_text("Buzzzz!")
-
 	if self.orbiting.empty():
 		return
 
@@ -51,6 +49,9 @@ func __handle_attacking():
 			pet.attacking_direction = facing_direction
 			pet.set_state(Pet.STATES.attacking)
 
+			self.get_parent().set_text("Buzzzz!")
+			self.get_parent().play_sound($buzz)
+
 			return
 
 
@@ -66,12 +67,22 @@ func __orbit_pets() -> void:
 
 	var separation_angle = TAU / count
 
+	var rng = RandomNumberGenerator.new()
+	rng.set_seed(3)
+
 	for i in range(count):
 		if !self.orbiting[i].state in [Pet.STATES.joining, Pet.STATES.orbiting]:
 			continue
 
+#		var direction = -1 if randi() % 2 == 0 else 1
 		var orbit_offset = Vector2.UP.rotated(separation_angle * i + PhysicsTime.elapsed_time)
-		var orbit_position = self.__position() + orbit_offset * self.ORBITING_RADIUS_MAX
+		var orbiting_radius = self.ORBITING_RADIUS_MAX
+		if !self.get_parent() is Player:
+			orbiting_radius *= 2.5
+
+		orbiting_radius *= rng.randf() * 0.1 - 1.0
+
+		var orbit_position = self.__position() + orbit_offset * orbiting_radius
 
 		var move_speed = 200.0
 
@@ -80,6 +91,7 @@ func __orbit_pets() -> void:
 			PhysicsTime.delta_time * move_speed
 		)
 		self.orbiting[i].orbit_position = orbit_position
+		self.orbiting[i].facing_direction = self.get_parent().facing_direction
 
 
 func __position() -> Vector2:
@@ -90,3 +102,21 @@ func stop_attack() -> void:
 	for pet in self.orbiting:
 		if pet.state == Pet.STATES.attacking:
 			pet.state = Pet.STATES.orbiting
+
+
+func reparent(parent) -> void:
+	self.get_parent().remove_child(self)
+	parent.add_child(self)
+
+
+func spawn_bees() -> void:
+	var bee_scene = load("res://source/scenes/pet.tscn")
+
+	for i in range(10):
+		var instance = bee_scene.instance()
+		instance.position = self.__position() + Vector2(-500.0, 0.0).rotated(PI * 1.5 + PI/10 * i)
+		instance.state = Pet.STATES.joining
+
+		self.orbiting.insert(randi() % self.orbiting.size(), instance)
+
+		Globals.main_instance.call_deferred("add_child", instance)

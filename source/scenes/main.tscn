@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://source/assets/ground.png" type="Texture" id=1]
 [ext_resource path="res://source/assets/ground/base_dirt.png" type="Texture" id=2]
@@ -15,13 +15,38 @@
 [ext_resource path="res://source/assets/ground/grass_5.png" type="Texture" id=13]
 [ext_resource path="res://source/assets/ground/grass_4.png" type="Texture" id=14]
 [ext_resource path="res://source/assets/ground/rock_2.png" type="Texture" id=15]
+[ext_resource path="res://source/assets/ground/base_dirt_top.png" type="Texture" id=16]
 [ext_resource path="res://source/scripts/layer.gd" type="Script" id=17]
 [ext_resource path="res://source/scripts/world.gd" type="Script" id=18]
+[ext_resource path="res://source/assets/background_underground.png" type="Texture" id=19]
+[ext_resource path="res://source/assets/health_empty.png" type="Texture" id=20]
+[ext_resource path="res://source/assets/health_full.png" type="Texture" id=21]
+[ext_resource path="res://source/scripts/health.gd" type="Script" id=22]
+[ext_resource path="res://source/assets/boss_health_overlay.png" type="Texture" id=23]
+[ext_resource path="res://source/assets/boss_health_container.png" type="Texture" id=24]
+[ext_resource path="res://source/scripts/boss_health.gd" type="Script" id=25]
+[ext_resource path="res://source/assets/queen_bee.png" type="Texture" id=26]
+[ext_resource path="res://source/scripts/queen_bee.gd" type="Script" id=27]
+[ext_resource path="res://source/audio/intro_2.ogg" type="AudioStream" id=28]
+[ext_resource path="res://source/audio/outro.ogg" type="AudioStream" id=29]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 20 ) ],
+"loop": true,
+"name": "empty",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ) ],
+"loop": true,
+"name": "full",
+"speed": 5.0
+} ]
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="TileSet" id=2]
+[sub_resource type="TileSet" id=3]
 0/name = "ground.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -32,25 +57,28 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 1 )
+0/shape = SubResource( 2 )
 0/shape_one_way = false
 0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 1 ),
+"shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
 
-[sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="TileSet" id=5]
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="TileSet" id=7]
 0/name = "base.png 0"
 0/texture = ExtResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
@@ -61,14 +89,14 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 3 )
+0/shape = SubResource( 4 )
 0/shape_one_way = false
 0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 3 ),
+"shape": SubResource( 4 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
@@ -82,26 +110,47 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape = SubResource( 4 )
+1/shape = SubResource( 5 )
 1/shape_one_way = false
 1/shape_one_way_margin = 1.0
 1/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 4 ),
+"shape": SubResource( 5 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
+2/name = "base_dirt_top.png 2"
+2/texture = ExtResource( 16 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 32, 32 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape = SubResource( 6 )
+2/shape_one_way = false
+2/shape_one_way_margin = 1.0
+2/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+2/z_index = 0
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 11 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=9]
 extra_spacing_bottom = 6
 font_data = ExtResource( 11 )
 
-[sub_resource type="TileSet" id=8]
+[sub_resource type="TileSet" id=10]
 0/name = "rock_1.png 0"
 0/texture = ExtResource( 9 )
 0/tex_offset = Vector2( 0, 0 )
@@ -131,7 +180,7 @@ font_data = ExtResource( 11 )
 1/shapes = [  ]
 1/z_index = 0
 
-[sub_resource type="TileSet" id=9]
+[sub_resource type="TileSet" id=11]
 0/name = "grass_1.png 0"
 0/texture = ExtResource( 8 )
 0/tex_offset = Vector2( 0, 0 )
@@ -203,7 +252,11 @@ font_data = ExtResource( 11 )
 4/shapes = [  ]
 4/z_index = 0
 
+[sub_resource type="DynamicFont" id=12]
+font_data = ExtResource( 11 )
+
 [node name="main" type="Node2D"]
+position = Vector2( 320, 180 )
 script = ExtResource( 4 )
 
 [node name="background" type="Sprite" parent="."]
@@ -211,8 +264,53 @@ position = Vector2( 320, 180 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
+[node name="background_underground" type="Sprite" parent="."]
+visible = false
+position = Vector2( 320, 180 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 19 )
+
+[node name="boss_health" type="TextureProgress" parent="."]
+visible = false
+margin_left = 180.0
+margin_top = 8.0
+margin_right = 308.0
+margin_bottom = 48.0
+rect_scale = Vector2( 2, 2 )
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_under = ExtResource( 24 )
+texture_progress = ExtResource( 23 )
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="health" type="Node2D" parent="."]
+position = Vector2( 22, 22 )
+z_index = 15
+script = ExtResource( 22 )
+
+[node name="health_0" type="AnimatedSprite" parent="health"]
+scale = Vector2( 2, 2 )
+frames = SubResource( 1 )
+animation = "full"
+
+[node name="health_1" type="AnimatedSprite" parent="health"]
+position = Vector2( 32, 0 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 1 )
+animation = "full"
+
+[node name="health_2" type="AnimatedSprite" parent="health"]
+position = Vector2( 64, 0 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 1 )
+animation = "full"
+
 [node name="world_edges" type="TileMap" parent="."]
-tile_set = SubResource( 2 )
+tile_set = SubResource( 3 )
 cell_size = Vector2( 32, 32 )
 collision_mask = 7
 format = 1
@@ -220,7 +318,7 @@ tile_data = PoolIntArray( -393217, 0, 0, -458732, 0, 0, -327681, 0, 0, -393216, 
 script = ExtResource( 3 )
 
 [node name="world" type="TileMap" parent="."]
-tile_set = SubResource( 5 )
+tile_set = SubResource( 7 )
 cell_size = Vector2( 32, 32 )
 collision_mask = 7
 format = 1
@@ -234,7 +332,7 @@ z_index = 20
 visible = false
 margin_right = 150.0
 margin_bottom = 50.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "Ooops
 "
 align = 1
@@ -253,7 +351,7 @@ margin_left = -159.0
 margin_top = -49.0
 margin_right = 161.0
 margin_bottom = -35.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Hello
 world"
@@ -268,7 +366,7 @@ margin_left = -160.0
 margin_top = -50.0
 margin_right = 160.0
 margin_bottom = -36.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0.882353, 0.882353, 0.882353, 1 )
 text = "Hello
 world"
@@ -282,7 +380,7 @@ __meta__ = {
 "world_layers",
 ]]
 z_index = 1
-tile_set = SubResource( 8 )
+tile_set = SubResource( 10 )
 cell_size = Vector2( 32, 32 )
 format = 1
 script = ExtResource( 17 )
@@ -293,7 +391,7 @@ type_count = 2
 "world_layers",
 ]]
 z_index = 1
-tile_set = SubResource( 9 )
+tile_set = SubResource( 11 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 1048606, 6, 0, 1048607, 6, 0, 1048608, 6, 0, 1114130, 6, 0, 1114134, 6, 0 )
@@ -301,6 +399,52 @@ script = ExtResource( 17 )
 type_count = 5
 
 [node name="camera" parent="." instance=ExtResource( 5 )]
-position = Vector2( 320, 180 )
+position = Vector2( 320.841, 180.841 )
 z_index = 15
 zoom = Vector2( 0.5, 0.5 )
+
+[node name="queen_bee" type="Sprite" parent="."]
+position = Vector2( 750, 40 )
+scale = Vector2( 2, 2 )
+z_index = 3
+texture = ExtResource( 26 )
+script = ExtResource( 27 )
+
+[node name="message" type="Node2D" parent="queen_bee"]
+visible = false
+
+[node name="shadow" type="Label" parent="queen_bee/message"]
+margin_left = -39.0
+margin_top = -19.0
+margin_right = 121.0
+margin_bottom = 8.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Thank you 
+Gnomad"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="message" type="Label" parent="queen_bee/message"]
+margin_left = -40.0
+margin_top = -20.0
+margin_right = 120.0
+margin_bottom = 7.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Thank you 
+Gnomad"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="outro" type="AudioStreamPlayer" parent="queen_bee"]
+stream = ExtResource( 29 )
+
+[node name="intro" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 28 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/gnome_buzz_2.ogg-d5ea077c00b83cd326ccf3dbad35e4d6.oggstr"
+
+[deps]
+
+source_file="res://source/audio/gnome_buzz_2.ogg"
+dest_files=[ "res://.import/gnome_buzz_2.ogg-d5ea077c00b83cd326ccf3dbad35e4d6.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -19,11 +19,13 @@ var drag: float = 0.1
 var gravity: float = -30
 
 onready var jump_offset = randf() * self.JUMP_TIME_MAX
+onready var pitch = [0.9, 1.0, 1.1, 1.2][randi() % 4]
 
 
 func _ready() -> void:
 	self.add_to_group( "enemies" )
 	$sprite.scale.x = 1 if randi() % 2 else -1
+	self.set_text("")
 
 
 func _physics_process(delta: float) -> void:
@@ -38,7 +40,8 @@ func __handle_damaged() -> void:
 			if PhysicsTime.on_interval( 0.1, 0.0 ):
 				$sprite.visible = !$sprite.visible
 
-			self.set_text("Gnomore, please!")
+			self.set_text("Gnomore!")
+			self.play_sound($gnomore)
 		else:
 			self.damaged_timer = 0.0
 			$sprite.visible = true
@@ -58,7 +61,9 @@ func __handle_movement() -> void:
 		var distance = self.position.distance_to(Globals.player_instance.position)
 		if distance < self.TARGET_DISTANCE_MAX:
 			self.target = Globals.player_instance
-			self.set_text("Hugs please?")
+			self.set_text("Hugs?")
+			$hug.pitch_scale = self.pitch
+			$hug.play()
 	else:
 		if self.is_on_floor() && PhysicsTime.on_interval(self.JUMP_TIME_MAX, self.jump_offset):
 			var direction = self.position.direction_to(self.target.position)
@@ -90,6 +95,20 @@ func damage() -> void:
 
 
 func set_text(text: String) -> void:
-	$Label.text = text
-	$Label.rect_size.x = 0
-	$Label.rect_position.x = -$Label.rect_size.x * 0.5
+	$message.rect_size.x = 0
+	$message.text = text
+	$message.rect_position.x = -text.length() * 4
+	$shadow.rect_size.x = 0
+	$shadow.text = text
+	$shadow.rect_position.x = 1 - text.length() * 4
+	$shadow.rect_position.y = $message.rect_position.y + 1
+
+
+
+func play_sound(sound: Node) -> void:
+	for child in sound.get_children():
+		if child.playing:
+			return
+	var index = randi() % sound.get_child_count()
+	sound.get_child(index).play()
+	sound.get_child(index).pitch_scale = self.pitch

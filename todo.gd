@@ -36,20 +36,32 @@
 #		dash pets would have a longer recharge
 
 
-# POLISH STREAM THINGS!
-# - Add fade effect to text
-# - Add flower picking which increases bee damage
-
-
-# NEXT TIME WE WORK ON THIS!
-# Update background to be the same but brown in the underground
-# Create a new base tile for the underground
-# Add text to boss
-# Fix text on slimes
-# Add open scene with backstory
-# Add queen bee to round out game and finish it
-# Stretch: Keep count of deaths
-# Stretch: Keep count of time taken
-# Polish: Balance boss fight now that we have three bees
-# Add boss health bar
-# Add arrow pointing in direction to travel + prevent movement if enemies present
+# THIS TIME WE WORK ON THIS!
+# [x] Update background to be the same but brown in the underground
+# [x] Create a new base tile for the underground
+# [x] Add camera shake
+# [x] Make bees face same direction as player
+# [x] Add text to boss
+# [x] Fix text on slimes
+# [x] Add a player health indicator (As Ian suggested, use honey pots. Full if health, empty if not)
+# [x] Add boss health bar
+# [x] Change bee text color
+# [x] Change slime text color
+# [x] Add queen bee to round out game and finish it
+# [x] Fix bee-eetle location
+# [x] Add open scene with backstory
+# [ ] Add sound effects
+# [ ] Stop player text when audio over
+# [ ] Add music - ambient, slime, boss
+# [ ] Add arrow pointing in direction to travel + prevent movement if enemies present
+# [ ] Create itch page
+# [ ] Beetle to branch in intro
+# [ ] Polish: Balance boss fight now that we have three bees
+# [ ] Stretch: Add honey comb to boss fight, falls when wall hit
+# [ ] Stretch: Add bee-eetle breaking apart while attacking
+# [ ] Stretch: Stop bees going through things
+# [ ] Stretch: Add staggered text for boss
+# [ ] Stretch: Keep count of deaths
+# [ ] Stretch: Keep count of time taken
+# [ ] Stretch: Add fade effect to text
+# [ ] Stretch: Add flower picking which increases bee damage

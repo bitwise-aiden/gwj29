@@ -48,6 +48,8 @@ func load_from_texture(texture: Texture, reload: bool = false) -> void:
 					self.set_cellv(Vector2(x,y), 0)
 				Color("6e4c30"):
 					self.set_cellv(Vector2(x,y), 1)
+				Color("543a25"):
+					self.set_cellv(Vector2(x,y), 2)
 				Color("ec273f"):
 					self.spawn_player(Vector2(x,y), reload)
 				Color("f3a833"):
@@ -107,6 +109,7 @@ func load_next_right() -> void:
 	self.load_next_offset(Vector2.RIGHT)
 	self.moving_horizontal = true
 
+
 func load_next_down() -> void:
 	self.load_next_offset(Vector2.DOWN)
 	self.moving_horizontal = false
@@ -144,6 +147,11 @@ func load_next_offset(offset: Vector2) -> void:
 
 	TaskManager.add_queue(
 		"world",
+		Task.RunFunc.new(funcref(self, "switch_background"), [self.current.y])
+	)
+
+	TaskManager.add_queue(
+		"world",
 		Globals.camera_instance.create_fade_in( 0.5 )
 	)
 
@@ -151,6 +159,12 @@ func load_next_offset(offset: Vector2) -> void:
 		"world",
 		Task.RunFunc.new(funcref(self, "unpause"))
 	)
+
+
+func switch_background(background: int) -> void:
+	Globals.main_instance.get_child(0).visible = background == 0
+	Globals.main_instance.get_child(1).visible = background == 1
+
 
 func update_entities():
 	if self.moving_horizontal:
@@ -172,6 +186,7 @@ func spawn_player(position: Vector2, reload: bool = true) -> void:
 	if !Globals.player_instance:
 		var instance = load("res://source/scenes/player.tscn").instance()
 		instance.position = position * 32
+		Globals.health_instance.health_changed(3)
 
 		self.get_parent().call_deferred("add_child", instance)
 	elif reload:
@@ -179,6 +194,7 @@ func spawn_player(position: Vector2, reload: bool = true) -> void:
 		Globals.player_instance.health = 3
 		Globals.player_instance.velocity = Vector2.ZERO
 		Globals.player_instance.found_bee = false
+		Globals.health_instance.health_changed(3)
 
 
 func spawn_pet(position: Vector2, reload: bool) -> void:

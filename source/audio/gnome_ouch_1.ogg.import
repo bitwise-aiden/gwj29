@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/gnome_ouch_1.ogg-eaaf6b1b1ecf9ee8498267879eb5a2d6.oggstr"
+
+[deps]
+
+source_file="res://source/audio/gnome_ouch_1.ogg"
+dest_files=[ "res://.import/gnome_ouch_1.ogg-eaaf6b1b1ecf9ee8498267879eb5a2d6.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
