@@ -152,10 +152,10 @@ func __handle_resting() -> void:
 	$sprite.scale.y = -1.0
 
 func set_text(text: String) -> void:
-	$message.text = text
 	$message.rect_size.x = 0
-	$message.rect_position.x = -$message.rect_size.x * 0.25
-	$shadow.text = text
+	$message.text = text
+	$message.rect_position.x = -text.length() * 4
 	$shadow.rect_size.x = 0
-	$shadow.rect_position.x = 1 - $shadow.rect_size.x * 0.25
+	$shadow.text = text
+	$shadow.rect_position.x = 1 - text.length() * 4
 	$shadow.rect_position.y = $message.rect_position.y + 1

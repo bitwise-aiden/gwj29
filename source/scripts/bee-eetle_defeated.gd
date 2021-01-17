@@ -82,5 +82,10 @@ func on_audio_finished():
 
 	TaskManager.add_queue(
 		"end_game",
+		Task.RunFunc.new(funcref(Globals, "reset_player_instance"))
+	)
+
+	TaskManager.add_queue(
+		"end_game",
 		Task.RunFunc.new(funcref(self.get_tree(), "reload_current_scene"))
 	)

@@ -39,9 +39,6 @@ func __handle_damaged() -> void:
 		if !PhysicsTime.on_timestamp( self.damaged_timer ):
 			if PhysicsTime.on_interval( 0.1, 0.0 ):
 				$sprite.visible = !$sprite.visible
-
-			self.set_text("Gnomore!")
-			self.play_sound($gnomore)
 		else:
 			self.damaged_timer = 0.0
 			$sprite.visible = true
@@ -92,6 +89,9 @@ func damage() -> void:
 
 	if self.health <= 0:
 		self.remove_from_group( "enemies" )
+	else:
+		self.set_text("Gnomore!")
+		self.play_sound($gnomore)
 
 
 func set_text(text: String) -> void:
@@ -112,3 +112,12 @@ func play_sound(sound: Node) -> void:
 	var index = randi() % sound.get_child_count()
 	sound.get_child(index).play()
 	sound.get_child(index).pitch_scale = self.pitch
+
+
+func _on_gnomore_finished() -> void:
+	if $message.text == "Gnomore!":
+		self.set_text("")
+
+func _on_hugs_finished() -> void:
+	if $message.text == "Hugs?":
+		self.set_text("")

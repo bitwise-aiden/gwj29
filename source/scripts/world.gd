@@ -11,6 +11,7 @@ func _ready() -> void:
 
 func load_from_vector(map_position: Vector2, reload: bool = false) -> void:
 	var texture = self.load_texture(map_position)
+	self.current = map_position
 	self.load_from_texture(texture, reload)
 
 
@@ -77,6 +78,11 @@ func reload_current():
 	TaskManager.add_queue(
 		"world",
 		Task.RunFunc.new(funcref($death_message/label, "set_visible"), [true])
+	)
+
+	TaskManager.add_queue(
+		"world",
+		Task.RunFunc.new(funcref($oops, "play"))
 	)
 
 	TaskManager.add_queue(

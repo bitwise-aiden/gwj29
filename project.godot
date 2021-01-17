@@ -74,9 +74,10 @@ _global_script_class_icons={
 
 [application]
 
-config/name="gwj29"
+config/name="Gnomad!"
 run/main_scene="res://source/scenes/intro.tscn"
-config/icon="res://icon.png"
+config/icon="res://source/assets/pet.png"
+config/windows_native_icon="res://source/assets/pet_icon.ico"
 
 [autoload]
 

@@ -38,6 +38,10 @@ func clear_queue( queue: String ) -> void:
 		self.__queues[ queue ].clear()
 
 
+func get_queues() -> Array:
+	return self.__queues.keys()
+
+
 func pause_queue( queue: String ) -> void:
 	if queue in self.__queues:
 		self.__queues[ queue ].pause()

@@ -50,12 +50,19 @@
 # [x] Add queen bee to round out game and finish it
 # [x] Fix bee-eetle location
 # [x] Add open scene with backstory
-# [ ] Add sound effects
-# [ ] Stop player text when audio over
-# [ ] Add music - ambient, slime, boss
+# [x] Add music - ambient, boss
+# [x] Add sound effects
+#		- [ ] walking
+#		- [ ] squishing
+#		- [ ] tapping (beetle)
+#		- [x] fix cutting off
+#		- [x] oops sound
+# [x] Balance sound please and thank you
+# [x] Stop player text when audio over
 # [ ] Add arrow pointing in direction to travel + prevent movement if enemies present
+# [x] Beetle to branch in intro
+# [x] Ensure build is complete for submission, intro voice false, and intro scene
 # [ ] Create itch page
-# [ ] Beetle to branch in intro
 # [ ] Polish: Balance boss fight now that we have three bees
 # [ ] Stretch: Add honey comb to boss fight, falls when wall hit
 # [ ] Stretch: Add bee-eetle breaking apart while attacking

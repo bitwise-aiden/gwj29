@@ -19,13 +19,13 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 1 ) ],
 "loop": true,
-"name": "charging",
-"speed": 15.0
+"name": "walking",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 1 ) ],
 "loop": true,
-"name": "walking",
-"speed": 10.0
+"name": "charging",
+"speed": 15.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -89,12 +89,19 @@ __meta__ = {
 [node name="buzz_off" type="Node2D" parent="."]
 
 [node name="buzz_off_1" type="AudioStreamPlayer2D" parent="buzz_off"]
+pause_mode = 2
 stream = ExtResource( 8 )
+bus = "Ian"
 
 [node name="buzz_off_2" type="AudioStreamPlayer2D" parent="buzz_off"]
+pause_mode = 2
 stream = ExtResource( 7 )
+bus = "Ian"
 
 [node name="uwot" type="AudioStreamPlayer2D" parent="."]
+pause_mode = 2
 stream = ExtResource( 10 )
+bus = "Ian"
 [connection signal="finished" from="buzz_off/buzz_off_1" to="." method="_on_buzz_off_finished"]
 [connection signal="finished" from="buzz_off/buzz_off_2" to="." method="_on_buzz_off_finished"]
+[connection signal="finished" from="uwot" to="." method="_on_uwot_finished"]

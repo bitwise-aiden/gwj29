@@ -147,12 +147,12 @@ func should_jump() -> bool:
 
 
 func set_text(text: String) -> void:
-	$message.text = text
 	$message.rect_size.x = 0
-	$message.rect_position.x = -$message.rect_size.x * 0.25
-	$shadow.text = text
+	$message.text = text
+	$message.rect_position.x = -text.length() * 4
 	$shadow.rect_size.x = 0
-	$shadow.rect_position.x = 1 - $shadow.rect_size.x * 0.25
+	$shadow.text = text
+	$shadow.rect_position.x = 1 - text.length() * 4
 	$shadow.rect_position.y = $message.rect_position.y + 1
 
 
@@ -191,3 +191,18 @@ func play_sound(sound: Node, other: Node = null) -> void:
 func stop_sound(sound: Node) -> void:
 	for child in sound.get_children():
 		child.playing = false
+
+
+func _on_buzz_finished() -> void:
+	if $message.text == "Buzzzz!":
+		self.set_text("")
+
+
+func _on_ouch_finished() -> void:
+	if $message.text == "Ouch!":
+		self.set_text("")
+
+
+func _on_wee_finished() -> void:
+	if $message.text == "Weee!":
+		self.set_text("")

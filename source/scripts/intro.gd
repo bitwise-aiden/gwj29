@@ -2,6 +2,9 @@ extends Node2D
 
 
 func _ready() -> void:
+	if OS.has_feature('JavaScript'):
+		JavaScript.eval("document.getElementById('status').style.display = 'none'")
+
 	TaskManager.add_queue(
 		"intro",
 		$camera.create_fade_in(0.5)
@@ -9,7 +12,22 @@ func _ready() -> void:
 
 	TaskManager.add_queue(
 		"intro",
-		Task.Wait.new(1.0)
+		Task.Wait.new(0.5)
+	)
+
+	TaskManager.add_queue(
+		"intro",
+		Task.Lerp.new(deg2rad(-3.5), deg2rad(0.0), 0.1, funcref($beetle, "set_rotation"))
+	)
+
+	TaskManager.add_queue(
+		"intro",
+		Task.Lerp.new(deg2rad(0.0), deg2rad(-7.0), 0.2, funcref($beetle, "set_rotation"))
+	)
+
+	TaskManager.add_queue(
+		"intro",
+		Task.Lerp.new(deg2rad(-7.0), deg2rad(-3.5), 0.1, funcref($beetle, "set_rotation"))
 	)
 
 	TaskManager.add_queue(
@@ -22,7 +40,6 @@ func _ready() -> void:
 		"intro",
 		camera_shake
 	)
-
 
 	TaskManager.add_queue(
 		"intro",

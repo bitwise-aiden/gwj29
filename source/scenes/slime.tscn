@@ -54,13 +54,22 @@ __meta__ = {
 }
 
 [node name="hug" type="AudioStreamPlayer2D" parent="."]
+pause_mode = 2
 stream = ExtResource( 4 )
 pitch_scale = 0.9
+bus = "B33"
 
 [node name="gnomore" type="Node2D" parent="."]
 
 [node name="gnomore_1" type="AudioStreamPlayer2D" parent="gnomore"]
+pause_mode = 2
 stream = ExtResource( 6 )
+bus = "B33"
 
 [node name="gnomore_2" type="AudioStreamPlayer2D" parent="gnomore"]
+pause_mode = 2
 stream = ExtResource( 5 )
+bus = "B33"
+[connection signal="finished" from="hug" to="." method="_on_hugs_finished"]
+[connection signal="finished" from="gnomore/gnomore_1" to="." method="_on_gnomore_finished"]
+[connection signal="finished" from="gnomore/gnomore_2" to="." method="_on_gnomore_finished"]

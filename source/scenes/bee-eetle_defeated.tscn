@@ -56,5 +56,7 @@ __meta__ = {
 }
 
 [node name="dead" type="AudioStreamPlayer2D" parent="."]
+pause_mode = 2
 stream = ExtResource( 4 )
 autoplay = true
+bus = "Ian"

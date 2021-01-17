@@ -89,13 +89,19 @@ script = ExtResource( 3 )
 [node name="buzz" type="Node2D" parent="attacking_orbit"]
 
 [node name="buzz_1" type="AudioStreamPlayer2D" parent="attacking_orbit/buzz"]
+pause_mode = 2
 stream = ExtResource( 13 )
+bus = "Velop"
 
 [node name="buzz_2" type="AudioStreamPlayer2D" parent="attacking_orbit/buzz"]
+pause_mode = 2
 stream = ExtResource( 11 )
+bus = "Velop"
 
 [node name="buzz_3" type="AudioStreamPlayer2D" parent="attacking_orbit/buzz"]
+pause_mode = 2
 stream = ExtResource( 12 )
+bus = "Velop"
 
 [node name="hit_area" type="Area2D" parent="."]
 
@@ -105,16 +111,31 @@ shape = SubResource( 4 )
 [node name="ouch" type="Node2D" parent="."]
 
 [node name="ouch_1" type="AudioStreamPlayer2D" parent="ouch"]
+pause_mode = 2
 stream = ExtResource( 9 )
+bus = "Velop"
 
 [node name="ouch_2" type="AudioStreamPlayer2D" parent="ouch"]
+pause_mode = 2
 stream = ExtResource( 10 )
+bus = "Velop"
 
 [node name="wee" type="Node2D" parent="."]
 
 [node name="wee_1" type="AudioStreamPlayer2D" parent="wee"]
+pause_mode = 2
 stream = ExtResource( 14 )
+bus = "Velop"
 
 [node name="wee_2" type="AudioStreamPlayer2D" parent="wee"]
+pause_mode = 2
 stream = ExtResource( 15 )
+bus = "Velop"
+[connection signal="finished" from="attacking_orbit/buzz/buzz_1" to="." method="_on_buzz_finished"]
+[connection signal="finished" from="attacking_orbit/buzz/buzz_2" to="." method="_on_buzz_finished"]
+[connection signal="finished" from="attacking_orbit/buzz/buzz_3" to="." method="_on_buzz_finished"]
 [connection signal="body_entered" from="hit_area" to="." method="_on_hit_area_body_entered"]
+[connection signal="finished" from="ouch/ouch_1" to="." method="_on_ouch_finished"]
+[connection signal="finished" from="ouch/ouch_2" to="." method="_on_ouch_finished"]
+[connection signal="finished" from="wee/wee_1" to="." method="_on_wee_finished"]
+[connection signal="finished" from="wee/wee_2" to="." method="_on_wee_finished"]

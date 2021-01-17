@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://source/assets/ground.png" type="Texture" id=1]
 [ext_resource path="res://source/assets/ground/base_dirt.png" type="Texture" id=2]
@@ -29,6 +29,11 @@
 [ext_resource path="res://source/scripts/queen_bee.gd" type="Script" id=27]
 [ext_resource path="res://source/audio/intro_2.ogg" type="AudioStream" id=28]
 [ext_resource path="res://source/audio/outro.ogg" type="AudioStream" id=29]
+[ext_resource path="res://source/audio/gnome_oops.ogg" type="AudioStream" id=30]
+[ext_resource path="res://source/audio/scat_normal.ogg" type="AudioStream" id=31]
+[ext_resource path="res://source/scripts/music.gd" type="Script" id=32]
+[ext_resource path="res://source/audio/scat_boss.ogg" type="AudioStream" id=33]
+[ext_resource path="res://source/scripts/screenshot.gd" type="Script" id=34]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -353,8 +358,7 @@ margin_right = 161.0
 margin_bottom = -35.0
 custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Hello
-world"
+text = "Loading..."
 align = 1
 valign = 1
 __meta__ = {
@@ -368,13 +372,17 @@ margin_right = 160.0
 margin_bottom = -36.0
 custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0.882353, 0.882353, 0.882353, 1 )
-text = "Hello
-world"
+text = "Loading..."
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="oops" type="AudioStreamPlayer" parent="world"]
+pause_mode = 2
+stream = ExtResource( 30 )
+bus = "Velop"
 
 [node name="rocks" type="TileMap" parent="." groups=[
 "world_layers",
@@ -399,7 +407,8 @@ script = ExtResource( 17 )
 type_count = 5
 
 [node name="camera" parent="." instance=ExtResource( 5 )]
-position = Vector2( 320.841, 180.841 )
+visible = false
+position = Vector2( 320, 180 )
 z_index = 15
 zoom = Vector2( 0.5, 0.5 )
 
@@ -444,7 +453,23 @@ __meta__ = {
 }
 
 [node name="outro" type="AudioStreamPlayer" parent="queen_bee"]
+pause_mode = 2
 stream = ExtResource( 29 )
+bus = "B33bee"
 
 [node name="intro" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 28 )
+bus = "B33bee"
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 31 )
+autoplay = true
+bus = "Music"
+script = ExtResource( 32 )
+default = ExtResource( 31 )
+boss = ExtResource( 33 )
+
+[node name="screenshot" type="Node2D" parent="."]
+script = ExtResource( 34 )

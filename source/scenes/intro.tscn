@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://tools/scenes/camera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/assets/background.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://source/assets/just_hive.png" type="Texture" id=4]
 [ext_resource path="res://source/scripts/intro.gd" type="Script" id=5]
 [ext_resource path="res://source/audio/intro_1.ogg" type="AudioStream" id=6]
+[ext_resource path="res://source/assets/beetle/bee-eetle-walking4.png" type="Texture" id=7]
 
 [node name="intro" type="Node2D"]
 script = ExtResource( 5 )
@@ -25,11 +26,17 @@ position = Vector2( 244, 166 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 4 )
 
+[node name="beetle" type="Sprite" parent="."]
+position = Vector2( 278.913, 2.81853 )
+rotation = -0.0615955
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+
 [node name="camera" parent="." instance=ExtResource( 1 )]
-visible = false
 position = Vector2( 320, 180 )
 zoom = Vector2( 0.5, 0.5 )
 
 [node name="intro" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "B33bee"
 [connection signal="finished" from="intro" to="." method="_on_audio_finished"]

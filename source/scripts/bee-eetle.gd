@@ -50,6 +50,7 @@ func _physics_process(delta: float) -> void:
 		STATES.idle:
 			var player_direction_x = sign(self.position.direction_to(player.position).x)
 			if player.position.y > 250.0:
+				Globals.music_instance.play_boss()
 				self.set_text("u wot m8")
 				$uwot.play()
 				self.state = STATES.readying
@@ -126,6 +127,9 @@ func _physics_process(delta: float) -> void:
 						self.velocity.x = 0.0
 		elif self.state == STATES.charging:
 			player.damage(self)
+			if player.health <= 0:
+				Globals.music_instance.play_default()
+
 			self.state = STATES.stunned
 			self.velocity.x = 0.0
 			$sprite.play("idle")
@@ -142,6 +146,10 @@ func damage() -> void:
 		TaskManager.add_queue(
 			"camera",
 			Globals.camera_instance.create_camera_shake(5.0, 0.5)
+		)
+		TaskManager.add_queue(
+			"camera",
+			Task.RunFunc.new(funcref(Globals.music_instance, "play_default"))
 		)
 
 		self.state = STATES.dying
@@ -198,6 +206,12 @@ func set_text(text: String) -> void:
 func _on_buzz_off_finished() -> void:
 	if $message.text == "buzz off":
 		self.set_text("")
+
+
+func _on_uwot_finished() -> void:
+	if $message.text == "u wot m8":
+		self.set_text("")
+
 
 func buzz_off():
 	for child in $buzz_off.get_children():
