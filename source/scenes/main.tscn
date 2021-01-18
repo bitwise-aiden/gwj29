@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://source/assets/ground.png" type="Texture" id=1]
 [ext_resource path="res://source/assets/ground/base_dirt.png" type="Texture" id=2]
@@ -33,7 +33,6 @@
 [ext_resource path="res://source/audio/scat_normal.ogg" type="AudioStream" id=31]
 [ext_resource path="res://source/scripts/music.gd" type="Script" id=32]
 [ext_resource path="res://source/audio/scat_boss.ogg" type="AudioStream" id=33]
-[ext_resource path="res://source/scripts/screenshot.gd" type="Script" id=34]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -407,7 +406,6 @@ script = ExtResource( 17 )
 type_count = 5
 
 [node name="camera" parent="." instance=ExtResource( 5 )]
-visible = false
 position = Vector2( 320, 180 )
 z_index = 15
 zoom = Vector2( 0.5, 0.5 )
@@ -470,6 +468,3 @@ bus = "Music"
 script = ExtResource( 32 )
 default = ExtResource( 31 )
 boss = ExtResource( 33 )
-
-[node name="screenshot" type="Node2D" parent="."]
-script = ExtResource( 34 )

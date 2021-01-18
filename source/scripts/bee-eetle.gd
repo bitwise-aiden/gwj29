@@ -29,6 +29,7 @@ var readying_time: float = 0.0
 var stunned_charging: bool = false
 
 var damaged_timer: float = 0.0
+var dead = false
 
 func _ready() -> void:
 	self.add_to_group("enemies")
@@ -141,7 +142,8 @@ func damage() -> void:
 	Globals.boss_health_instance.value = float(self.health) / float(self.HEALTH_MAX)
 	self.damaged_timer = PhysicsTime.elapsed_time + 0.5
 
-	if self.health <= 0:
+	if !self.dead && self.health <= 0:
+		self.dead = false
 		self.call_deferred("queue_free")
 		TaskManager.add_queue(
 			"camera",
