@@ -31,6 +31,9 @@ var stunned_charging: bool = false
 var damaged_timer: float = 0.0
 var dead = false
 
+func _init() -> void:
+	self.position.y = 227.0
+
 func _ready() -> void:
 	self.add_to_group("enemies")
 	Globals.boss_health_instance.visible = true

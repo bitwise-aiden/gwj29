@@ -19,7 +19,7 @@ var drag: float = 0.1
 var gravity: float = -30
 
 onready var jump_offset = randf() * self.JUMP_TIME_MAX
-onready var pitch = [0.9, 1.0, 1.1, 1.2][randi() % 4]
+onready var pitch = [1.1, 1.2][randi() % 2]
 
 
 func _ready() -> void:

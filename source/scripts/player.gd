@@ -73,14 +73,17 @@ func __handle_movement():
 		if self.velocity.y < 0.0:
 			self.velocity.y *= 0.3
 
-	self.velocity.y -= self.gravity
+	if !self.is_on_floor():
+		self.velocity.y -= self.gravity
+	else:
+		self.velocity.y = max(0.0, self.velocity.y)
 
 	if self.is_on_floor():
 		self.jumping = false
 		self.on_ground_buffer = self.ON_GROUND_BUFFER
 
-	if self.is_on_floor() && !self.damaged_timer:
-		self.velocity = lerp( self.velocity, Vector2.ZERO, self.drag)
+	if !self.damaged_timer:
+		self.velocity.x = lerp( self.velocity.x, 0.0, self.drag)
 
 		var movement_direction = Vector2(
 			Input.get_action_strength("right") - Input.get_action_strength("left"),
@@ -89,10 +92,11 @@ func __handle_movement():
 
 		if movement_direction:
 			self.velocity += movement_direction * self.acceleration * PhysicsTime.delta_time
-		else:
+		elif self.is_on_floor():
 			self.velocity.x = 0.0
 
 	self.velocity.x = min( self.velocity.x, self.VELOCITY_MAX )
+	print(self.velocity.x)
 
 	if self.should_jump() && !self.damaged_timer:
 		self.set_text("Weee!")

@@ -9,7 +9,7 @@ extends Node
 #	> 1.0 is speed up
 var time_modifier = 1.0
 
-var played_intro = false
+var played_intro = true
 
 
 # Instance globals
