@@ -3,6 +3,7 @@ extends TileMap
 var current: Vector2 = Vector2(0,0)
 var moving_horizontal: bool = true
 
+
 func _ready() -> void:
 	Globals.world_instance = self
 
@@ -192,6 +193,7 @@ func spawn_player(position: Vector2, reload: bool = true) -> void:
 	if !Globals.player_instance:
 		var instance = load("res://source/scenes/player.tscn").instance()
 		instance.position = position * 32
+		instance.connect("hit_ground", self, "__hit_ground")
 		Globals.health_instance.health_changed(3)
 
 		self.get_parent().call_deferred("add_child", instance)
@@ -226,3 +228,36 @@ func spawn_beeeetle(position: Vector2) -> void:
 #	instance.position.y += 50.0
 
 	self.get_parent().call_deferred("add_child", instance)
+	
+
+var image = Image.new()
+var texture = ImageTexture.new()
+var __positions: Array = []
+
+func __hit_ground(position: Vector2) -> void:
+	for i in range(20): 
+		var pos = (
+			position + 
+			Vector2(randf() * 25.0, 0.0).rotated(randf() * TAU) + 
+			Vector2(0.0, 16.0)
+		)
+		self.__positions.append(
+			Color(pos.x, pos.y, randf() * 10.0 + 2.5)
+		)
+	self.__positions.append(Color(position.x, position.y, randf() * 10.0 + 10.0))
+	
+	image.create(self.__positions.size(), 1, false, Image.FORMAT_RGBAH)
+	
+	image.lock()
+	
+	for i in self.__positions.size():
+		var color = self.__positions[i]
+		image.set_pixel(i, 0, color)
+	
+	image.unlock()
+	
+	texture.create_from_image(image)
+	
+	self.material.set_shader_param("positions", self.texture)
+	self.material.set_shader_param("positions_count", self.__positions.size())
+	

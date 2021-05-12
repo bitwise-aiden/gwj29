@@ -1,5 +1,7 @@
 class_name Player extends KinematicBody2D
 
+signal hit_ground(position)
+
 const VELOCITY_MAX = 250.0
 const JUMP_VELOCITY_MAX = 500.0
 const JUMP_BUFFER_MAX = 0.125
@@ -59,8 +61,14 @@ func __handle_damaged() -> void:
 
 			Globals.world_instance.reload_current()
 
+var was_on_floor = false
 
 func __handle_movement():
+	if self.is_on_floor() && !was_on_floor:
+		self.emit_signal("hit_ground", self.position)
+	
+	was_on_floor = is_on_floor()
+	
 	if self.jump_buffer > 0.0:
 		self.jump_buffer = max(0.0, self.jump_buffer - PhysicsTime.delta_time)
 
@@ -96,7 +104,6 @@ func __handle_movement():
 			self.velocity.x = 0.0
 
 	self.velocity.x = min( self.velocity.x, self.VELOCITY_MAX )
-	print(self.velocity.x)
 
 	if self.should_jump() && !self.damaged_timer:
 		self.set_text("Weee!")

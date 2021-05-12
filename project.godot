@@ -75,7 +75,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Gnomad!"
-run/main_scene="res://source/scenes/intro.tscn"
+run/main_scene="res://source/scenes/main.tscn"
 config/icon="res://source/assets/pet.png"
 config/windows_native_icon="res://source/assets/pet_icon.ico"
 

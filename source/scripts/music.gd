@@ -21,7 +21,6 @@ func play_boss() -> void:
 
 
 func fade_between(stream: AudioStream) -> void:
-	print('Hello?')
 	TaskManager.add_queue(
 		"music",
 		Task.Lerp.new(0.0, -80.0, 2.0, funcref(self, "set_volume_db"))

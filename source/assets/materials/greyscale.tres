@@ -1,0 +1,30 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+
+uniform sampler2D positions;
+uniform int positions_count; 
+
+void fragment() 
+{
+	bool is_colorful = false;
+	vec2 screen_pos = vec2(SCREEN_UV.x * 640.0, 360.0 - SCREEN_UV.y * 360.0);
+	
+	for (int i = 0; !is_colorful && i < positions_count; i++) 
+	{
+		vec4 pos = texelFetch(positions, ivec2(i, 0), 0);
+		
+		float dist = distance(pos.xy, screen_pos);
+		
+		is_colorful = dist < pos.z;
+	}
+	
+	vec4 color = texture(TEXTURE, UV);
+	float value = length(color.rgb) / 3.0;
+	COLOR = is_colorful ? color : vec4(value, value, value, color.a); 
+}"
+
+[resource]
+shader = SubResource( 12 )
+shader_param/positions_count = 1
